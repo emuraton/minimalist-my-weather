@@ -1,0 +1,8 @@
+{
+  "name": "minimalist-my-weather",
+  "version": "1.0.0",
+  "description": "Minimalist react native weather app using graphql",
+  "main": "index.js",
+  "author": "Emilien Muraton <emilien.muraton@gmail.com>",
+  "license": "MIT"
+}
