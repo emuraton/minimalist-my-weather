@@ -8,7 +8,8 @@
   "scripts": {
     "start": "nodemon server/index.js",
     "lint": "eslint ./ --ext=js --ext=jsx",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "test": "jest -o"
   },
   "lint-staged": {
     "*.{js,jsx}": [
@@ -30,6 +31,8 @@
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.12.4",
+    "jest": "^24.7.1",
+    "jest-fetch-mock": "^2.1.2",
     "nodemon": "^1.18.11",
     "prettier": "^1.17.0"
   }
