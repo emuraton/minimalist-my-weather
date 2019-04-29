@@ -4,6 +4,7 @@ import ApolloClient, { gql } from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
 
 import SearchInput from './components/Search';
+import CityRow from './components/CityRow';
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000/graphql',
@@ -47,7 +48,6 @@ export default class App extends React.Component {
 
   render() {
     const { locations } = this.state;
-    console.log({ locations });
     return (
       <ApolloProvider client={client}>
         <View style={styles.container}>
@@ -55,25 +55,7 @@ export default class App extends React.Component {
             placeholder="Select a City"
             onSubmit={this.handleSubmit}
           />
-          {locations && (
-            <FlatList
-              data={locations}
-              renderItem={({ item }) => {
-                return (
-                  <>
-                    <Text
-                      style={styles.row}
-                      onPress={() => console.log(item.woeid)}
-                    >
-                      {item.title}
-                    </Text>
-                    <View style={styles.line} />
-                  </>
-                );
-              }}
-              keyExtractor={item => item.woeid}
-            />
-          )}
+          {locations && <CityRow locations={locations} />}
         </View>
       </ApolloProvider>
     );
@@ -84,19 +66,5 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
     alignItems: 'center',
-  },
-  row: {
-    width: 300,
-    height: 10,
-    paddingTop: 15,
-    paddingBottom: 25,
-    paddingLeft: 20,
-    fontSize: 16,
-    color: '#5c5c74',
-  },
-  line: {
-    borderWidth: 0.5,
-    borderColor: '#5c5c74',
-    margin: 10,
   },
 });
