@@ -7,15 +7,14 @@
   "license": "MIT",
   "scripts": {
     "start": "nodemon server/index.js",
-    "lint": "eslint",
-    "precommit": "lint-staged",
+    "lint": "eslint ./ --ext=js --ext=jsx",
+    "precommit": "lint-staged"
   },
   "lint-staged": {
     "*.{js,jsx}": [
       "prettier --single-quote --write",
-      "eslint --fix",
-      // "jest --bail --findRelatedTests",
-    ],
+      "eslint --fix"
+    ]
   },
   "dependencies": {
     "apollo-server-express": "^2.4.8",
@@ -27,6 +26,9 @@
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-config-prettier": "^4.2.0",
+    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.12.4",
     "nodemon": "^1.18.11",
     "prettier": "^1.17.0"

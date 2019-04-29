@@ -44,11 +44,11 @@ const resolvers = {
     getWeatherDay: (_, { woeid, date }) =>
       fetch(`${BASE_API_URL}/location/${woeid}/${date}`)
         .then(res => res.json())
-        .then(data => data)
-  }
+        .then(data => data),
+  },
 };
 
 module.exports = {
   typeDefs,
-  resolvers
+  resolvers,
 };
