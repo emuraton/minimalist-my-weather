@@ -6,7 +6,16 @@
   "author": "Emilien Muraton <emilien.muraton@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon server/index.js"
+    "start": "nodemon server/index.js",
+    "lint": "eslint",
+    "precommit": "lint-staged",
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "prettier --single-quote --write",
+      "eslint --fix",
+      // "jest --bail --findRelatedTests",
+    ],
   },
   "dependencies": {
     "apollo-server-express": "^2.4.8",
@@ -14,6 +23,12 @@
     "graphql": "^14.2.1"
   },
   "devDependencies": {
-    "nodemon": "^1.18.11"
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-prettier": "^4.2.0",
+    "eslint-plugin-react": "^7.12.4",
+    "nodemon": "^1.18.11",
+    "prettier": "^1.17.0"
   }
 }
