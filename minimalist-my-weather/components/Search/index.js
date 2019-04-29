@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { TextInput, StyleSheet, View } from 'react-native';
+import { ApolloConsumer } from 'react-apollo';
 
 const styles = StyleSheet.create({
   searchBar: {
-    flex: 1,
     paddingTop: 50,
   },
   textInput: {
@@ -28,27 +28,30 @@ export default class SeachInput extends Component {
     this.setState({ text });
   };
 
-  handleSubmitEditing = () => {
+  handleSubmitEditing = client => {
     if (!this.state.text) return;
 
-    this.props.onSubmit(this.state.text);
-    this.setState({ text: '' });
+    this.props.onSubmit(client, this.state.text);
   };
 
   render() {
     return (
-      <View style={styles.searchBar}>
-        <TextInput
-          value={this.state.text}
-          autoCorrect={false}
-          placeholder={this.props.placeholder}
-          underlineColorAndroid="transparent"
-          style={styles.textInput}
-          clearButtonMode="always"
-          onChangeText={this.handleChangeText}
-          onSubmitEditing={this.handleSubmitEditing}
-        />
-      </View>
+      <ApolloConsumer>
+        {client => (
+          <View style={styles.searchBar}>
+            <TextInput
+              value={this.state.text}
+              autoCorrect={false}
+              placeholder={this.props.placeholder}
+              underlineColorAndroid="transparent"
+              style={styles.textInput}
+              clearButtonMode="always"
+              onChangeText={this.handleChangeText}
+              onSubmitEditing={() => this.handleSubmitEditing(client)}
+            />
+          </View>
+        )}
+      </ApolloConsumer>
     );
   }
 }
