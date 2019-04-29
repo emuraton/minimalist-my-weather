@@ -4,5 +4,16 @@
   "description": "Minimalist react native weather app using graphql",
   "main": "index.js",
   "author": "Emilien Muraton <emilien.muraton@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon server/index.js"
+  },
+  "dependencies": {
+    "apollo-server-express": "^2.4.8",
+    "express": "^4.16.4",
+    "graphql": "^14.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.11"
+  }
 }
