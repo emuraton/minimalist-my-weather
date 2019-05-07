@@ -5,7 +5,8 @@ import { ApolloProvider } from 'react-apollo';
 
 import SearchInput from './components/Search';
 import CityRow from './components/CityRow';
-import { GET_LOCATIONS } from './utils/gql';
+import WeatherView from './components/WeatherView';
+import { GET_LOCATIONS, GET_LOCATION } from './utils/gql';
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000/graphql',
@@ -16,8 +17,21 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       locations: null,
+      weathers: null,
     };
   }
+
+  handleCityChoice = async ({ client, woeid }) => {
+    const { data } = await client.query({
+      query: GET_LOCATION,
+      variables: {
+        woeid,
+      },
+    });
+    this.setState(() => ({
+      weathers: data.getLocation.consolidated_weather,
+    }));
+  };
 
   handleSubmit = async (client, query) => {
     const { data } = await client.query({
@@ -26,15 +40,13 @@ export default class App extends React.Component {
         query,
       },
     });
-    if (data) {
-      this.setState(() => ({
-        locations: data.getLocations,
-      }));
-    }
+    this.setState(() => ({
+      locations: data ? data.getLocations : null,
+    }));
   };
 
   render() {
-    const { locations } = this.state;
+    const { locations, weathers } = this.state;
     return (
       <ApolloProvider client={client}>
         <View style={styles.container}>
@@ -42,8 +54,9 @@ export default class App extends React.Component {
             placeholder="Select a City"
             onSubmit={this.handleSubmit}
           />
-          {locations && <CityRow locations={locations} />}
+          <CityRow locations={locations} handlePress={this.handleCityChoice} />
         </View>
+        <WeatherView weathers={weathers} />
       </ApolloProvider>
     );
   }

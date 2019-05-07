@@ -19,7 +19,9 @@ const styles = StyleSheet.create({
   },
 });
 
-function CityRow({ locations }) {
+function CityRow({ locations, handlePress }) {
+  if (!locations) return null;
+
   return (
     <ApolloConsumer>
       {client => (
@@ -30,7 +32,7 @@ function CityRow({ locations }) {
               <>
                 <Text
                   style={styles.row}
-                  onPress={() => console.log(item.woeid, client)}
+                  onPress={() => handlePress({ client, woeid: item.woeid })}
                 >
                   {item.title}
                 </Text>
