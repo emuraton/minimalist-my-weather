@@ -26,8 +26,8 @@ const typeDefs = gql`
   }
   type Query {
     getLocations(query: String): [Location]
-    getLocation(woeid: Int): Location
-    getWeatherDay(woeid: Int): [Weather]
+    getLocation(woeid: String): Location
+    getWeatherDay(woeid: String): [Weather]
   }
 `;
 
