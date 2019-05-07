@@ -49,14 +49,21 @@ export default class App extends React.Component {
     const { locations, weathers } = this.state;
     return (
       <ApolloProvider client={client}>
-        <View style={styles.container}>
-          <SearchInput
-            placeholder="Select a City"
-            onSubmit={this.handleSubmit}
-          />
-          <CityRow locations={locations} handlePress={this.handleCityChoice} />
-        </View>
-        <WeatherView weathers={weathers} />
+        <>
+          <View style={styles.container}>
+            <SearchInput
+              placeholder="Select a City"
+              onSubmit={this.handleSubmit}
+            />
+            {!weathers && (
+              <CityRow
+                locations={locations}
+                handlePress={this.handleCityChoice}
+              />
+            )}
+          </View>
+          <WeatherView weathers={weathers} />
+        </>
       </ApolloProvider>
     );
   }

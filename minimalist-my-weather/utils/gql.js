@@ -16,6 +16,7 @@ export const GET_LOCATION = gql`
         id
         applicable_date
         weather_state_name
+        weather_state_abbr
         wind_speed
         wind_direction
         the_temp
