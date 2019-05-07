@@ -1,32 +1,20 @@
 import React from 'react';
-import { StyleSheet, View, TextInput, FlatList, Text } from 'react-native';
-import ApolloClient, { gql } from 'apollo-boost';
+import { StyleSheet, View } from 'react-native';
+import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
 
 import SearchInput from './components/Search';
 import CityRow from './components/CityRow';
+import { GET_LOCATIONS } from './utils/gql';
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000/graphql',
 });
 
-const GET_LOCATIONS = gql`
-  query Location($query: String!) {
-    getLocations(query: $query) {
-      title
-      woeid
-    }
-  }
-`;
-
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // locations: [
-      //   { title: 'London', woeid: '44418', __typename: 'Location' },
-      //   { title: 'London', woeid: '44419', __typename: 'Location' },
-      // ],
       locations: null,
     };
   }
@@ -39,7 +27,6 @@ export default class App extends React.Component {
       },
     });
     if (data) {
-      console.log({ data });
       this.setState(() => ({
         locations: data.getLocations,
       }));

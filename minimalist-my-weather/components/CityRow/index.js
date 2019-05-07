@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, StyleSheet, FlatList, View } from 'react-native';
+import { ApolloConsumer } from 'react-apollo';
 
 const styles = StyleSheet.create({
   row: {
@@ -20,20 +21,27 @@ const styles = StyleSheet.create({
 
 function CityRow({ locations }) {
   return (
-    <FlatList
-      data={locations}
-      renderItem={({ item }) => {
-        return (
-          <>
-            <Text style={styles.row} onPress={() => console.log(item.woeid)}>
-              {item.title}
-            </Text>
-            <View style={styles.line} />
-          </>
-        );
-      }}
-      keyExtractor={item => item.woeid}
-    />
+    <ApolloConsumer>
+      {client => (
+        <FlatList
+          data={locations}
+          renderItem={({ item }) => {
+            return (
+              <>
+                <Text
+                  style={styles.row}
+                  onPress={() => console.log(item.woeid, client)}
+                >
+                  {item.title}
+                </Text>
+                <View style={styles.line} />
+              </>
+            );
+          }}
+          keyExtractor={item => item.woeid}
+        />
+      )}
+    </ApolloConsumer>
   );
 }
 
