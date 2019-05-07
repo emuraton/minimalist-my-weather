@@ -35,7 +35,7 @@ export default function WeatherView({ weathers }) {
         }}
         style={styles.image}
       />
-      <Text style={styles.temperature}>{temperature}</Text>
+      <Text style={styles.temperature}>{Math.round(temperature)}</Text>
     </View>
   );
 }
