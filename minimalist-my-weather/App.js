@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
 
@@ -55,6 +55,7 @@ export default class App extends React.Component {
               placeholder="Select a City"
               onSubmit={this.handleSubmit}
             />
+            {isLoading && <Text>Loading...</Text>}
             {!weathers && (
               <CityRow
                 locations={locations}
