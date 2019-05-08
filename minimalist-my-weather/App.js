@@ -59,12 +59,14 @@ export default class App extends React.Component {
     return (
       <ApolloProvider client={client}>
         <>
-          <View style={styles.container}>
+          <View style={styles.inputContainer}>
             <SearchInput
-              placeholder="Select a City"
+              placeholder="Search"
               onSubmit={this.handleSubmit}
               value={city}
             />
+          </View>
+          <View style={styles.weatherContainer}>
             {isLoading && <Text>Loading...</Text>}
             {!weathers && (
               <CityRow
@@ -72,8 +74,8 @@ export default class App extends React.Component {
                 handlePress={this.handleCityChoice}
               />
             )}
+            <WeatherView weathers={weathers} />
           </View>
-          <WeatherView weathers={weathers} />
         </>
       </ApolloProvider>
     );
@@ -81,8 +83,13 @@ export default class App extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#fff',
-    alignItems: 'center',
+  inputContainer: {
+    flex: 1,
+    backgroundColor: '#1976d2',
+  },
+  weatherContainer: {
+    flex: 5,
+    paddingTop: 50,
+    backgroundColor: 'white',
   },
 });

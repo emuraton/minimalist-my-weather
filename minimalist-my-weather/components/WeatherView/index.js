@@ -2,11 +2,6 @@ import React from 'react';
 import { Image, StyleSheet, View, Text } from 'react-native';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    paddingTop: 50,
-  },
   image: {
     height: 200,
     width: 200,
@@ -28,7 +23,7 @@ export default function WeatherView({ weathers }) {
   } = weathers[0];
 
   return (
-    <View style={styles.container}>
+    <View>
       <Image
         source={{
           uri: `${BASE_URL}/static/img/weather/png/${weatherAbbr}.png`,

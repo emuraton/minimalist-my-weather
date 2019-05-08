@@ -3,6 +3,9 @@ import { Text, StyleSheet, FlatList, View } from 'react-native';
 import { ApolloConsumer } from 'react-apollo';
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 4,
+  },
   row: {
     width: 300,
     height: 10,
@@ -26,6 +29,7 @@ function CityRow({ locations, handlePress }) {
     <ApolloConsumer>
       {client => (
         <FlatList
+          style={styles.container}
           data={locations}
           renderItem={({ item }) => {
             return (

@@ -3,18 +3,21 @@ import { TextInput, StyleSheet, View } from 'react-native';
 import { ApolloConsumer } from 'react-apollo';
 
 const styles = StyleSheet.create({
-  searchBar: {
-    paddingTop: 50,
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: 20,
   },
   textInput: {
-    width: 300,
+    width: '90%',
     height: 50,
-    marginTop: 40,
     backgroundColor: '#f5f5f5',
-    marginHorizontal: 20,
-    paddingHorizontal: 10,
-    alignSelf: 'center',
-    color: '#63717f',
+    color: '#5a6672',
+    borderRadius: 50,
+    paddingLeft: 30,
+    fontSize: 16,
+    fontWeight: '500',
   },
 });
 
@@ -38,7 +41,7 @@ export default class SeachInput extends Component {
     return (
       <ApolloConsumer>
         {client => (
-          <View style={styles.searchBar}>
+          <View style={styles.container}>
             <TextInput
               value={this.props.value || this.state.text}
               autoCorrect={false}
@@ -48,6 +51,7 @@ export default class SeachInput extends Component {
               clearButtonMode="always"
               onChangeText={this.handleChangeText}
               onSubmitEditing={() => this.handleSubmitEditing(client)}
+              placeholderTextColor={styles.textInput.color}
             />
           </View>
         )}
