@@ -32,7 +32,9 @@ function CityRow({ locations, handlePress }) {
               <>
                 <Text
                   style={styles.row}
-                  onPress={() => handlePress({ client, woeid: item.woeid })}
+                  onPress={() =>
+                    handlePress({ client, woeid: item.woeid, city: item.title })
+                  }
                 >
                   {item.title}
                 </Text>

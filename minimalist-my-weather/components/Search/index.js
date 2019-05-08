@@ -40,7 +40,7 @@ export default class SeachInput extends Component {
         {client => (
           <View style={styles.searchBar}>
             <TextInput
-              value={this.state.text}
+              value={this.props.value || this.state.text}
               autoCorrect={false}
               placeholder={this.props.placeholder}
               underlineColorAndroid="transparent"

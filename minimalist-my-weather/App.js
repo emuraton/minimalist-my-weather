@@ -18,10 +18,12 @@ export default class App extends React.Component {
     this.state = {
       locations: null,
       weathers: null,
+      isLoading: false,
+      city: '',
     };
   }
 
-  handleCityChoice = async ({ client, woeid }) => {
+  handleCityChoice = async ({ client, woeid, city }) => {
     const { data } = await client.query({
       query: GET_LOCATION,
       variables: {
@@ -30,10 +32,16 @@ export default class App extends React.Component {
     });
     this.setState(() => ({
       weathers: data.getLocation.consolidated_weather,
+      city,
     }));
   };
 
   handleSubmit = async (client, query) => {
+    this.setState(() => ({
+      isLoading: true,
+      weathers: null,
+    }));
+
     const { data } = await client.query({
       query: GET_LOCATIONS,
       variables: {
@@ -42,11 +50,12 @@ export default class App extends React.Component {
     });
     this.setState(() => ({
       locations: data ? data.getLocations : null,
+      isLoading: false,
     }));
   };
 
   render() {
-    const { locations, weathers } = this.state;
+    const { locations, weathers, isLoading, city } = this.state;
     return (
       <ApolloProvider client={client}>
         <>
@@ -54,6 +63,7 @@ export default class App extends React.Component {
             <SearchInput
               placeholder="Select a City"
               onSubmit={this.handleSubmit}
+              value={city}
             />
             {isLoading && <Text>Loading...</Text>}
             {!weathers && (
