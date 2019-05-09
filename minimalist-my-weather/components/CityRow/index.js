@@ -5,20 +5,21 @@ import { ApolloConsumer } from 'react-apollo';
 const styles = StyleSheet.create({
   container: {
     flex: 4,
+    backgroundColor: 'white',
   },
   row: {
-    width: 300,
+    flex: 1,
+    fontSize: 16,
+    fontWeight: '400',
     height: 10,
     paddingTop: 15,
     paddingBottom: 25,
     paddingLeft: 20,
-    fontSize: 16,
-    color: '#5c5c74',
+    marginBottom: 10,
   },
   line: {
-    borderWidth: 0.5,
-    borderColor: '#5c5c74',
-    margin: 10,
+    borderBottomWidth: 0.5,
+    borderBottomColor: '#5c5c74',
   },
 });
 

@@ -89,7 +89,6 @@ const styles = StyleSheet.create({
   },
   weatherContainer: {
     flex: 5,
-    paddingTop: 50,
     backgroundColor: 'white',
   },
 });

@@ -13,7 +13,6 @@ const styles = StyleSheet.create({
     width: '90%',
     height: 50,
     backgroundColor: '#f5f5f5',
-    color: '#5a6672',
     borderRadius: 50,
     paddingLeft: 30,
     fontSize: 16,
@@ -51,7 +50,6 @@ export default class SeachInput extends Component {
               clearButtonMode="always"
               onChangeText={this.handleChangeText}
               onSubmitEditing={() => this.handleSubmitEditing(client)}
-              placeholderTextColor={styles.textInput.color}
             />
           </View>
         )}
