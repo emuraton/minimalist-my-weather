@@ -24,8 +24,10 @@ const styles = StyleSheet.create({
     width: 64,
   },
   text: {
-    padding: 9,
     textAlign: 'center',
+    fontSize: 16,
+    fontWeight: '300',
+    padding: 5,
   },
 });
 

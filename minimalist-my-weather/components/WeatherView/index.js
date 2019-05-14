@@ -14,7 +14,14 @@ const styles = StyleSheet.create({
   },
   temperature: {
     fontSize: 80,
+    fontWeight: '300',
     color: 'lightblue',
+    paddingTop: 20,
+    paddingLeft: 30,
+  },
+  text: {
+    fontSize: 32,
+    fontWeight: '200',
     paddingTop: 20,
     paddingLeft: 30,
   },
@@ -29,19 +36,19 @@ export default function WeatherView({ weather }) {
     weather_state_abbr: weatherAbbr,
     the_temp: temperature,
     applicable_date: date,
+    weather_state_name: weatherName,
   } = weather;
 
   return (
     <View style={styles.container}>
-      <Text style={styles.temperature}>
-        {fecha.format(new Date(date), 'ddd')}
-      </Text>
+      <Text style={styles.text}>{fecha.format(new Date(date), 'dddd')}</Text>
       <Image
         source={{
           uri: `${BASE_URL}/static/img/weather/png/${weatherAbbr}.png`,
         }}
         style={styles.image}
       />
+      <Text style={styles.text}>{weatherName}</Text>
       <Text style={styles.temperature}>{Math.round(temperature)}
 °
 </Text>
