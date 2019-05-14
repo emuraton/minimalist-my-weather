@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#1976d2',
   },
   weatherContainer: {
-    flex: 4,
+    flex: 5,
     backgroundColor: 'white',
   },
 });

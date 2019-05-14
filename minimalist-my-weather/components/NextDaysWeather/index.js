@@ -1,13 +1,14 @@
 import React from 'react';
 import { StyleSheet, ScrollView, View, Text, Image } from 'react-native';
+import fecha from 'fecha';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 2,
   },
   cell: {
     flex: 1,
-    // justifyContent: 'space-evenly',
+    justifyContent: 'space-evenly',
     paddingLeft: 15,
     paddingRight: 15,
   },
@@ -135,11 +136,12 @@ function NextDaysWeather() {
             weather_state_abbr: weatherAbbr,
             min_temp: minTemp,
             max_temp: maxTemp,
+            applicable_date: date,
             id,
           }) => (
             <View style={styles.cell} key={id}>
               <Text style={styles.temperature}>
-                {`${Math.round(minTemp)}°  ${Math.round(maxTemp)}°`}
+                {fecha.format(new Date(date), 'ddd')}
               </Text>
               <Image
                 style={styles.image}
@@ -147,6 +149,9 @@ function NextDaysWeather() {
                   uri: `https://www.metaweather.com/static/img/weather/png/64/${weatherAbbr}.png`,
                 }}
               />
+              <Text style={styles.temperature}>
+                {`${Math.round(minTemp)}°  ${Math.round(maxTemp)}°`}
+              </Text>
             </View>
           ),
         )}
