@@ -1,5 +1,12 @@
 import React from 'react';
-import { StyleSheet, ScrollView, View, Text, Image } from 'react-native';
+import {
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+  Text,
+  Image,
+  View,
+} from 'react-native';
 import fecha from 'fecha';
 
 const styles = StyleSheet.create({
@@ -22,25 +29,8 @@ const styles = StyleSheet.create({
   },
 });
 
-function NextDaysWeather() {
+function NextDaysWeather({ onPress }) {
   const weathers = [
-    {
-      id: 4673120805847040,
-      weather_state_name: 'Light Cloud',
-      weather_state_abbr: 'lc',
-      wind_direction_compass: 'SW',
-      created: '2019-04-25T15:06:17.064868Z',
-      applicable_date: '2019-04-25',
-      min_temp: 11.73,
-      max_temp: 14.56,
-      the_temp: 15.22,
-      wind_speed: 4.762288250462632,
-      wind_direction: 234.9872083642845,
-      air_pressure: 1013.9200000000001,
-      humidity: 76,
-      visibility: 11.534202755905511,
-      predictability: 70,
-    },
     {
       id: 6487367470809088,
       weather_state_name: 'Light Cloud',
@@ -127,7 +117,6 @@ function NextDaysWeather() {
       predictability: 70,
     },
   ];
-
   return (
     <View style={styles.container}>
       <ScrollView horizontal>
@@ -139,7 +128,11 @@ function NextDaysWeather() {
             applicable_date: date,
             id,
           }) => (
-            <View style={styles.cell} key={id}>
+            <TouchableOpacity
+              style={styles.cell}
+              key={id}
+              onPress={() => onPress(id)}
+            >
               <Text style={styles.text}>
                 {fecha.format(new Date(date), 'ddd')}
               </Text>
@@ -152,7 +145,7 @@ function NextDaysWeather() {
               <Text style={styles.text}>
                 {`${Math.round(minTemp)}°  ${Math.round(maxTemp)}°`}
               </Text>
-            </View>
+            </TouchableOpacity>
           ),
         )}
       </ScrollView>

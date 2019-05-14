@@ -124,6 +124,7 @@ export default class App extends React.Component {
       ],
       isLoading: false,
       city: '',
+      activeWeatherListIndex: 0,
     };
   }
 
@@ -158,8 +159,25 @@ export default class App extends React.Component {
     }));
   };
 
+  handleOnPressWeather = weatherId => {
+    const { weathers } = this.state;
+    const activeWeatherIndex = weathers.findIndex(w => w.id === weatherId);
+    this.setState(() => ({
+      activeWeatherListIndex:
+        activeWeatherIndex === -1 ? 0 : activeWeatherIndex,
+    }));
+  };
+
   render() {
-    const { locations, weathers, isLoading, city } = this.state;
+    const {
+      locations,
+      weathers,
+      isLoading,
+      city,
+      activeWeatherListIndex,
+    } = this.state;
+
+    const activeWeather = weathers ? weathers[activeWeatherListIndex] : 0;
     return (
       <ApolloProvider client={client}>
         <>
@@ -178,9 +196,9 @@ export default class App extends React.Component {
                 handlePress={this.handleCityChoice}
               />
             )}
-            <WeatherView weathers={weathers} />
+            <WeatherView weather={activeWeather} />
           </View>
-          <NextDaysWeather />
+          <NextDaysWeather onPress={this.handleOnPressWeather} />
         </>
       </ApolloProvider>
     );

@@ -22,14 +22,14 @@ const styles = StyleSheet.create({
 
 const BASE_URL = 'https://www.metaweather.com';
 
-export default function WeatherView({ weathers }) {
-  if (!weathers) return null;
+export default function WeatherView({ weather }) {
+  if (!weather) return null;
 
   const {
     weather_state_abbr: weatherAbbr,
     the_temp: temperature,
     applicable_date: date,
-  } = weathers[0];
+  } = weather;
 
   return (
     <View style={styles.container}>
