@@ -1,5 +1,6 @@
 import React from 'react';
 import { Image, StyleSheet, View, Text } from 'react-native';
+import fecha from 'fecha';
 
 const styles = StyleSheet.create({
   container: {
@@ -27,10 +28,14 @@ export default function WeatherView({ weathers }) {
   const {
     weather_state_abbr: weatherAbbr,
     the_temp: temperature,
+    applicable_date: date,
   } = weathers[0];
 
   return (
     <View style={styles.container}>
+      <Text style={styles.temperature}>
+        {fecha.format(new Date(date), 'ddd')}
+      </Text>
       <Image
         source={{
           uri: `${BASE_URL}/static/img/weather/png/${weatherAbbr}.png`,

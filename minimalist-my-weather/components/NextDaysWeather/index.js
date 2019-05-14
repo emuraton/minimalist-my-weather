@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     height: 64,
     width: 64,
   },
-  temperature: {
+  text: {
     padding: 9,
     textAlign: 'center',
   },
@@ -140,7 +140,7 @@ function NextDaysWeather() {
             id,
           }) => (
             <View style={styles.cell} key={id}>
-              <Text style={styles.temperature}>
+              <Text style={styles.text}>
                 {fecha.format(new Date(date), 'ddd')}
               </Text>
               <Image
@@ -149,7 +149,7 @@ function NextDaysWeather() {
                   uri: `https://www.metaweather.com/static/img/weather/png/64/${weatherAbbr}.png`,
                 }}
               />
-              <Text style={styles.temperature}>
+              <Text style={styles.text}>
                 {`${Math.round(minTemp)}°  ${Math.round(maxTemp)}°`}
               </Text>
             </View>
