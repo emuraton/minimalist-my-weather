@@ -26,14 +26,9 @@ export default class SeachInput extends Component {
     this.state = { text: '' };
   }
 
-  handleChangeText = text => {
-    this.setState({ text });
-  };
-
-  handleSubmitEditing = client => {
-    if (!this.state.text) return;
-
-    this.props.onSubmit(client, this.state.text);
+  handleChangeText = (text, client) => {
+    this.setState(() => ({ text }));
+    this.props.handleCitySearch(client, text);
   };
 
   render() {
@@ -48,8 +43,7 @@ export default class SeachInput extends Component {
               underlineColorAndroid="transparent"
               style={styles.textInput}
               clearButtonMode="always"
-              onChangeText={this.handleChangeText}
-              onSubmitEditing={() => this.handleSubmitEditing(client)}
+              onChangeText={text => this.handleChangeText(text, client)}
             />
           </View>
         )}

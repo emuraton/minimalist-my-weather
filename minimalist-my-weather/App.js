@@ -122,7 +122,6 @@ export default class App extends React.Component {
           predictability: 70,
         },
       ],
-      isLoading: false,
       city: '',
       activeWeatherListIndex: 0,
     };
@@ -141,11 +140,13 @@ export default class App extends React.Component {
     }));
   };
 
-  handleSubmit = async (client, query) => {
-    this.setState(() => ({
-      isLoading: true,
-      weathers: null,
-    }));
+  handleCitySearch = async (client, query) => {
+    const { weathers } = this.state;
+    if (weathers) {
+      this.setState(() => ({
+        weathers: null,
+      }));
+    }
 
     const { data } = await client.query({
       query: GET_LOCATIONS,
@@ -155,7 +156,6 @@ export default class App extends React.Component {
     });
     this.setState(() => ({
       locations: data ? data.getLocations : null,
-      isLoading: false,
     }));
   };
 
@@ -169,13 +169,7 @@ export default class App extends React.Component {
   };
 
   render() {
-    const {
-      locations,
-      weathers,
-      isLoading,
-      city,
-      activeWeatherListIndex,
-    } = this.state;
+    const { locations, weathers, city, activeWeatherListIndex } = this.state;
 
     const activeWeather = weathers ? weathers[activeWeatherListIndex] : 0;
     return (
@@ -184,12 +178,11 @@ export default class App extends React.Component {
           <View style={styles.inputContainer}>
             <SearchInput
               placeholder="Search"
-              onSubmit={this.handleSubmit}
+              handleCitySearch={this.handleCitySearch}
               value={city}
             />
           </View>
           <View style={styles.weatherContainer}>
-            {isLoading && <Text>Loading...</Text>}
             {!weathers && (
               <CityRow
                 locations={locations}
