@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { TextInput, StyleSheet, View } from 'react-native';
 import { ApolloConsumer } from 'react-apollo';
+import throttle from 'lodash/throttle';
 
 const styles = StyleSheet.create({
   container: {
@@ -24,11 +25,12 @@ export default class SeachInput extends Component {
   constructor(props) {
     super(props);
     this.state = { text: '' };
+    this.throttledSearch = throttle(props.handleCitySearch, 500);
   }
 
   handleChangeText = (text, client) => {
     this.setState(() => ({ text }));
-    this.props.handleCitySearch(client, text);
+    this.throttledSearch(client, text);
   };
 
   render() {
