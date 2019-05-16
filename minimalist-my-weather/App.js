@@ -191,7 +191,10 @@ export default class App extends React.Component {
             )}
             <WeatherView weather={activeWeather} />
           </View>
-          <NextDaysWeather onPress={this.handleOnPressWeather} />
+          <NextDaysWeather
+            onPress={this.handleOnPressWeather}
+            weathers={weathers}
+          />
         </>
       </ApolloProvider>
     );
