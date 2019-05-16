@@ -155,7 +155,7 @@ export default class App extends React.Component {
       },
     });
     this.setState(() => ({
-      locations: data ? data.getLocations : null,
+      locations: data.getLocations.length > 0 ? data.getLocations : null,
     }));
   };
 
